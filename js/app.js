@@ -4,11 +4,15 @@
 
 let game;
 
-document.getElementById('btn__reset').addEventListener('click', ()=>{
+$('#btn__reset').on('click', () => {
+    $('#phrase ul').empty();
+    $('.keyrow button').attr('disabled', false).attr('class', 'key');
+    $('img').attr('src', 'images/liveHeart.png');
     game = new Game();
     game.startGame();
 });
-// $('#btn__reset').on('click', () => {
-//     game = new Game();
-//     game.startGame();
-// });
+
+$('.keyrow').on('click', 'button', function( event ) {
+    event.preventDefault();
+    game.handleInteraction(this);
+});
