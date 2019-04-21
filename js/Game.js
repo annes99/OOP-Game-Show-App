@@ -22,7 +22,7 @@ class Game {
                 phrase: 'Caught with your hand in the cookie jar'
             },
             {
-                phrase: 'Stephen Hawking'
+                phrase: 'Treehouse is awesome'
             },
             {
                 phrase: 'vampires and werewolves'
@@ -53,7 +53,6 @@ class Game {
         this.getRandomPhrase();
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-
     }
 
     /**
@@ -72,6 +71,27 @@ class Game {
         } else if (game.activePhrase.checkLetter(quessedLetter) === true) {
             button.setAttribute('class', 'chosen');
             game.activePhrase.showMatchedLetter(quessedLetter);
+            this.checkForWin();
+            if (this.checkForWin() === true) {
+                this.gameOver(true);
+            }
+        }
+    }
+
+    /**
+     * Handles onscreen keyboard button clicks
+     * @param (key) key - actual key/letter that was released
+     */
+    handleKeyboard(key) {
+
+        $(`.key:contains(${key})`).attr('disabled', 'disabled');
+
+        if (game.activePhrase.checkLetter(key) === false) {
+            $(`.key:contains(${key})`).attr('class', 'wrong');
+            this.removeLife();
+        } else if (game.activePhrase.checkLetter(key) === true) {
+            $(`.key:contains(${key})`).attr('class', 'chosen');
+            game.activePhrase.showMatchedLetter(key);
             this.checkForWin();
             if (this.checkForWin() === true) {
                 this.gameOver(true);
@@ -107,24 +127,15 @@ class Game {
             $('.tries').eq(0).find('img').attr('src', 'images/lostHeart.png');
         } else if (this.missed == 2) {
 
-            $('.tries').eq(1).find('img').attr('src', 'images/lostHeart.png');
-            $('.tries').eq(0).find('img').attr('src', 'images/lostHeart.png');
+            $('.tries').eq(1, 0).find('img').attr('src', 'images/lostHeart.png');
         } else if (this.missed == 3) {
 
-            $('.tries').eq(2).find('img').attr('src', 'images/lostHeart.png');
-            $('.tries').eq(1).find('img').attr('src', 'images/lostHeart.png');
-            $('.tries').eq(0).find('img').attr('src', 'images/lostHeart.png');
+            $('.tries').eq(2, 1, 0).find('img').attr('src', 'images/lostHeart.png');
         } else if (this.missed == 4) {
 
-            $('.tries').eq(3).find('img').attr('src', 'images/lostHeart.png');
-            $('.tries').eq(2).find('img').attr('src', 'images/lostHeart.png');
-            $('.tries').eq(1).find('img').attr('src', 'images/lostHeart.png');
-            $('.tries').eq(0).find('img').attr('src', 'images/lostHeart.png');
+            $('.tries').eq(3, 2, 1, 0).find('img').attr('src', 'images/lostHeart.png');
         } else if (this.missed >= 5) {
-
-            console.log('game over');
             this.gameOver(false);
-
         }
     }
 
@@ -136,7 +147,7 @@ class Game {
     gameOver(gameWon) {
         if (gameWon) {
             $('#overlay').show().attr('class', 'win');
-            $('#game-over-message').text(`I'm thinking of a word for you that stats with "C" and ends in "ongratulations."`);
+            $('#game-over-message').text(`I'm thinking of a word for you that starts with "C" and ends in "ongratulations."`);
         } else {
             $('#overlay').show().attr('class', 'lose');
             $('#game-over-message').text('Better luck next time! 😿');

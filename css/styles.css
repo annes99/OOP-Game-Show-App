@@ -20,7 +20,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
 }
 
 body {
@@ -40,6 +40,7 @@ h2 {
   text-transform: uppercase;
   font-size: var(--font-size-large);
   margin: 0;
+  letter-spacing: 2px;
 }
 
 h1 {
@@ -58,6 +59,7 @@ button {
   -o-transition: var(--transition);
   transition: var(--transition);
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 #btn__reset {
@@ -110,16 +112,20 @@ button {
 
 
 .show {
-  color: #fff;
-  background-color: #4ac0d5;
-  font-size: 20px;
+  color: #3a3f58;
+  /* color: #fff; */
+  background-color: #49f9b0;
+  /* background-color: #4ac0d5; */
+  font-size: 30px;
+  /* font-size: 20px; */
   height: 65px;
   width: 65px;
-  padding: 20px 1px 0 1px;
+  padding: 10px 1px 0 1px;
   margin-right: 2px;
   border-radius: 5px;
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
+  text-transform: uppercase;
 }
 
 
@@ -138,7 +144,8 @@ button {
 }
 
 .wrong {
-  background: #f7a964;
+  background: #f95849;
+  /* background: #f7a964; */
   color: #FFFFFF;
 }
 
