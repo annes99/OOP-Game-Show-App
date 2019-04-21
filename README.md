@@ -21,7 +21,7 @@ Active demo: [Game Show App](https://annes99.github.io/OOP-Game-Show-App/)
 
 ## Screenshot
 
-![Example screenshot](images/screenshot2.png)
+![Example screenshot](images/screenshot3.png)
 
 ## Status
 
