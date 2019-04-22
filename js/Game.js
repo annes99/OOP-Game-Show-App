@@ -56,42 +56,19 @@ class Game {
     }
 
     /**
-     * Handles onscreen keyboard button clicks
-     * @param (HTMLButtonElement) button - The clicked button element
+     * Handles onscreen keyboard & physical computer keyboard button clicks & keyup's
+     * @param (letter) letter - actual letter that was clicked/released
      */
+    handleInteraction(letter) {
 
-    handleInteraction(button) {
+        $(`.key:contains(${letter})`).attr('disabled', 'disabled');
 
-        button.setAttribute('disabled', ' ');
-        let quessedLetter = button.textContent;
-
-        if (game.activePhrase.checkLetter(quessedLetter) === false) {
-            button.setAttribute('class', 'wrong');
+        if (game.activePhrase.checkLetter(letter) === false) {
+            $(`.key:contains(${letter})`).attr('class', 'wrong');
             this.removeLife();
-        } else if (game.activePhrase.checkLetter(quessedLetter) === true) {
-            button.setAttribute('class', 'chosen');
-            game.activePhrase.showMatchedLetter(quessedLetter);
-            this.checkForWin();
-            if (this.checkForWin() === true) {
-                this.gameOver(true);
-            }
-        }
-    }
-
-    /**
-     * Handles onscreen keyboard button clicks
-     * @param (key) key - actual key/letter that was released
-     */
-    handleKeyboard(key) {
-
-        $(`.key:contains(${key})`).attr('disabled', 'disabled');
-
-        if (game.activePhrase.checkLetter(key) === false) {
-            $(`.key:contains(${key})`).attr('class', 'wrong');
-            this.removeLife();
-        } else if (game.activePhrase.checkLetter(key) === true) {
-            $(`.key:contains(${key})`).attr('class', 'chosen');
-            game.activePhrase.showMatchedLetter(key);
+        } else if (game.activePhrase.checkLetter(letter) === true) {
+            $(`.key:contains(${letter})`).attr('class', 'chosen');
+            game.activePhrase.showMatchedLetter(letter);
             this.checkForWin();
             if (this.checkForWin() === true) {
                 this.gameOver(true);

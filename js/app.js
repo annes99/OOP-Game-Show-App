@@ -3,8 +3,8 @@
  * app.js */
 
 let game;
-// when 'Start Game' button is clicked it resets the gameboard and starts new Game
 
+// when 'Start Game' button is clicked it resets the gameboard and starts new Game
 $('#btn__reset').on('click', () => {
     $('#phrase ul').empty();
     $('.keyrow button').attr('disabled', false).attr('class', 'key');
@@ -12,11 +12,11 @@ $('#btn__reset').on('click', () => {
     game = new Game();
     game.startGame();
 });
-// when button element is clicked, game.handleInteraction() method is triggered
 
+// when button element is clicked, game.handleInteraction() method is triggered
 $('.keyrow').on('click', 'button', function (event) {
     event.preventDefault();
-    game.handleInteraction(this);
+    game.handleInteraction(event.target.innerText.toLowerCase());
 });
 
 
@@ -28,7 +28,7 @@ $('.keyrow').on('click', 'button', function (event) {
  */
 $(document).on('keyup', function (event) {
     if ($(`.key:contains(${event.key})`).val() !== undefined) {
-        game.handleKeyboard(event.key);
+        game.handleInteraction(event.key);
         console.log(event.key);
     } else {
         event.preventDefault();
